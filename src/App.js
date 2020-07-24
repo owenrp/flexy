@@ -25,6 +25,7 @@ class App extends React.Component {
     this.handleStartClick = this.handleStartClick.bind(this);
     this.handleTimeChange = this.handleTimeChange.bind(this);
     this.handleAddTime = this.handleAddTime.bind(this);
+    this.timerTest = this.timerTest.bind(this);
     // this.loopTimes = this.loopTimes.bind(this);
   }
 
@@ -133,6 +134,9 @@ class App extends React.Component {
     // I need a dictionary in the array? of the order and it's time value. Then the on change changes the value for just that one
   }
 
+  timerTest(){
+    console.log('timerTest going offff')
+  }
 
   render() {
     const times = this.state.times
@@ -158,14 +162,24 @@ class App extends React.Component {
           <Grid item xs={12}>
             <StartTime click={this.handleStartClick} />
           </Grid>
-          <Grid time={15} item xs={12}>
-            {/* put some condtionals here for the timer */}
-            {/*  if timer on then show*/}
-            {timerActive 
-              ?<Timer startTime={this.state.counter} timerActive={this.state.timerActive} />
-              :
-              <div>Countdown 0</div>
-            }
+          <Grid item xs={12}>
+          <Timer
+    initialTime={4000}
+    direction="backward"
+    timeToUpdate='10'
+    checkpoints={[
+        {
+            time: 0,
+            callback: () => console.log('whwhtuiehwriuewhturejgioer'),
+        }
+    ]}
+>
+    <Timer.Days /> days
+    <Timer.Hours /> hours
+    <Timer.Minutes /> minutes
+    <Timer.Seconds /> seconds
+    <Timer.Milliseconds /> milliseconds
+</Timer>  
           </Grid>
         </Grid> 
       </div>
@@ -259,29 +273,6 @@ class StartTime extends React.Component {
 //   );
 // }
 
-<Timer
-    initialTime={55000}
->
-    {({ start, resume, pause, stop, reset, timerState }) => (
-        <React.Fragment>
-            <div>
-                <Timer.Days /> days
-                <Timer.Hours /> hours
-                <Timer.Minutes /> minutes
-                <Timer.Seconds /> seconds
-                <Timer.Milliseconds /> milliseconds
-            </div>
-            <div>{timerState}</div>
-            <br />
-            <div>
-                <button onClick={start}>Start</button>
-                <button onClick={pause}>Pause</button>
-                <button onClick={resume}>Resume</button>
-                <button onClick={stop}>Stop</button>
-                <button onClick={reset}>Reset</button>
-            </div>
-        </React.Fragment>
-    )}
-</Timer>
+
 
 export default App;
